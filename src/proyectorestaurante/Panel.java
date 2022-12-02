@@ -55,11 +55,16 @@ public class Panel extends JFrame {
         
         mainPanelDos.setPreferredSize(new Dimension(600, 400));
         mainPanelDos.setLayout(new BorderLayout());
-        JPanel topPanel = new JPanel();
-        JPanel midPanelUno = new JPanel();
-        JPanel midPanelDos = new JPanel();
-        JPanel leftPanel = new JPanel();
-        JPanel rightPanel = new JPanel();
+        JPanel topPanel, midPanelUno, midPanelDos, leftPanel, rightPanel, leftPanelUno, leftPanelDos, leftPanelTres ;
+                
+        topPanel = new JPanel();
+        midPanelUno = new JPanel();
+        midPanelDos = new JPanel();
+        leftPanel = new JPanel();
+        rightPanel = new JPanel();
+        leftPanelUno = new JPanel();
+        leftPanelDos = new JPanel();
+        leftPanelTres = new JPanel();
        
         topPanel.setBackground(Color.decode("#FCD0B4"));
         midPanelUno.setBackground(Color.decode("#F7BFBE"));//#FBAED2
@@ -83,29 +88,61 @@ public class Panel extends JFrame {
         topPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         //adherir bar menu
         
-        
-        //Elementos leftPanel
+        //paneles leftPanel
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS)); //Y va uno sobre otro
-        String[] tipoCarta = { "Entradas y picoteos", "Platos de fondo", "Postres", "Bebestibles"};
-        String[] tipoInventario = {"Inventario", "Pila de cosas" };
-        String[] tipoRegistro = {"Ventas del Día ", "Venta mensual" };
+        
+        //leftPanel.setLayout(new BorderLayout()); // no me funcionó
+        leftPanelUno.setPreferredSize(new Dimension(150, 10));
+        leftPanelDos.setPreferredSize(new Dimension(150, 10));
+        leftPanelTres.setPreferredSize(new Dimension(150, 10));
+        leftPanel.add(leftPanelUno, BorderLayout.NORTH);
+        leftPanel.add(leftPanelDos, BorderLayout.CENTER);
+        leftPanel.add(leftPanelTres, BorderLayout.SOUTH);
+        //PONER JLabel
+        JLabel tc, ti, tr;
+        
+        tc = new JLabel("Carta");
+        ti = new JLabel("Inventario");
+        tr = new JLabel("Registro");
+        
+        
+        tc.setBounds(15, 418, 120, 20);
+        ti.setBounds(15, 418, 120, 20);
+        tr.setBounds(15, 418, 120, 20);
+        
+        leftPanelUno.add(tc);
+        leftPanelDos.add(ti);
+        leftPanelTres.add(tr);
+        
+        ///////////////
+        //add JComboBox Elementos leftPanel
+        String[] tipoCarta = { "-Seleccione-",  "Entradas y picoteos", "Platos de fondo", "Postres", "Bebestibles"};
+        String[] tipoInventario = {"-Seleccione-",  "Pila de cosas" };
+        String[] tipoRegistro = {"-Seleccione-", "Ventas del Día ", "Venta mensual" };
+        
+        //carta.addItem("entradas");
         //String[] tipoMantenimiento = {"Mantenimiento ", "Pila de cosas" };          
         
         carta = new JComboBox(tipoCarta);
         inventario = new JComboBox(tipoInventario);
         registro = new JComboBox(tipoRegistro);
               
-        leftPanel.add(carta);
-        leftPanel.add(inventario);
-        leftPanel.add(registro);
+        leftPanelUno.add(carta);
+        leftPanelDos.add(inventario);
+        leftPanelTres.add(registro); 
         
         carta.setEditable(false);
-        inventario.setEditable(true);
-        registro.setEditable(true);
+        inventario.setEditable(false);
+        registro.setEditable(false);
         
         carta.setSelectedItem("Carta");
         inventario.setSelectedItem("Inventario");
         registro.setSelectedItem("Registro");
+        
+        
+        
+        
+        
         
         //fin elementos leftPanel
         
@@ -131,31 +168,7 @@ public class Panel extends JFrame {
         topPanel.add(menuBar);
         //
         
-        //JButton Pagar/Cancelar
-
-        JPanel panelPagar;
-        JPanel panelLisPrec;
-        JTextArea listaPrecios;
-        
-        panelPagar= new JPanel();
-        panelLisPrec= new JPanel();
-        listaPrecios = new JTextArea();
-        
-        rightPanel.setLayout(new BorderLayout()); //da error
-        rightPanel.add(BorderLayout.SOUTH, panelPagar);
-        panelPagar.setPreferredSize(new Dimension(200, 70));
-        panelPagar.add(new JButton("Pagar")); //inicializa, agrega el estilo de diseño y el boton incluyendo el nombre todo en una linea
-        panelPagar.add(new JButton("Cancelar"));
-        
-        rightPanel.add(BorderLayout.NORTH, panelLisPrec);
-        panelLisPrec.setPreferredSize(new Dimension(200, 70));
-
-        //rightPanel.add(PanelListaPrecios, BorderLayout.SOUTH); //da error
-        
-        //PanelListaPrecios.add(listaPrecios);
-        //rightPanel.add(cancelar);
-        
-        
+       
         //JButtonGroup midPanelUno
         midPanelUno.setLayout(new GridLayout(3, 1));
         ButtonGroup grupoBotones = new ButtonGroup();
@@ -177,8 +190,8 @@ public class Panel extends JFrame {
         midPanelUno.add(entrada4);
         midPanelUno.add(entrada5);
         midPanelUno.add(entrada6);
-        entrada1.setVisible(true);
-        midPanelUno.setVisible(true);
+        entrada1.setVisible(false);
+        midPanelUno.setVisible(false);
        
        //
       
@@ -205,18 +218,72 @@ public class Panel extends JFrame {
         grupoBotonesDos.add(fondo4);
         grupoBotonesDos.add(fondo5);
         grupoBotonesDos.add(fondo6);
-        midPanelDos.add(entrada1);
-        midPanelDos.add(entrada2);
-        midPanelDos.add(entrada3);
-        midPanelDos.add(entrada4);
-        midPanelDos.add(entrada5);
-        midPanelDos.add(entrada6); 
         
-        midPanelDos.setVisible(false);
+        midPanelDos.add(fondo1); 
+        midPanelDos.add(fondo2);
+        midPanelDos.add(fondo3);
+        midPanelDos.add(fondo4);
+        midPanelDos.add(fondo5);
+        midPanelDos.add(fondo6);
+        
+        //fondo1.setVisible(true);
+        //midPanelDos.setVisible(true);
+    
+      
+        
+         //JButton Pagar/Cancelar
+
+        JPanel panelPagar; //NORTH
+        JPanel panelLisPrec; //SOUTH
+        JPanel panelPrec; //CENTER
+        JTextArea listaProd;
+        JLabel title;
+        
+        panelPagar= new JPanel();
+        panelLisPrec= new JPanel();
+        panelPrec = new JPanel();
+        listaProd = new JTextArea(10, 1); //filas y columnas
+        title = new JLabel("Productos seleccionados:");
+        
+        rightPanel.setLayout(new BorderLayout());
+        rightPanel.add(BorderLayout.SOUTH, panelPagar);
+        panelPagar.setPreferredSize(new Dimension(200, 40));
+        panelPagar.add(new JButton("Pagar")); //inicializa, agrega el estilo de diseño y el boton incluyendo el nombre todo en una linea
+        panelPagar.add(new JButton("Cancelar"));
+        
+        rightPanel.add(BorderLayout.NORTH, panelLisPrec);
+        panelLisPrec.setPreferredSize(new Dimension(200, 30));
+        panelLisPrec.add(title);
+        
+        
+        rightPanel.add(BorderLayout.CENTER, panelPrec);
+        panelPrec.setBackground(Color.green);
+        panelPrec.setPreferredSize(new Dimension(190, 300));
+        panelPrec.add(listaProd);
+        listaProd.setVisible(false);
+
+        //rightPanel.add(PanelListaPrecios, BorderLayout.SOUTH); //da error
+        //PanelListaPrecios.add(listaPrecios);
+        //rightPanel.add(cancelar);
+        
+        //midPanelDos.setVisible(false);
        //
 
          
 
     }
+    /*
+    ActionListener oyenteDeAccion = new ActionListener(){
+        panelUno();
+        panelDos();
+        
+        @Override
+        public void actionListened(ActionEvent ae){
+            if(ae.getSource() == (carta)){
+               
+                midPanelUno.setVisible(true); 
+            }
+        }
+    }; */
 
 }
